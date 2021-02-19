@@ -2,8 +2,6 @@
 aaaaaaaaaaaaaaaaaa
 
 - add lists
-
-
 */
 
 const lineReader = require('line-reader'); 
