@@ -22,6 +22,7 @@ function mainParser() {
         var result = parseLine(line);
         outputHtml(result);
     }); 
+    outputHtml('<link rel="stylesheet" href="style.css">');
    
 
 }
