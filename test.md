@@ -13,4 +13,11 @@ here is a blockqoute
 
 ---
 
+1. Lists
+2. Are
+3. A 
+4. **Thing!**
+
+
+
 ![markdown fun](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Markdown-mark.svg/1200px-Markdown-mark.png)

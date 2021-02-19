@@ -27,10 +27,15 @@ function mainParser() {
 
 }
 
+var inNumberList = false;
+var addedToNumberList = false;
+var firstAdd = false;
 let output = [];
 function parseLine(line) {
     
     var result = "";
+    addedToList = false;
+    
 
     if(line === "") {
         result = "";
@@ -47,8 +52,27 @@ function parseLine(line) {
     else if (line.startsWith("!")) {
         result = parseImage(line);
     }
+    else if (isNumeric(line[0]) && line[1] == ".") {
+        result = parseNumberedList(line);
+        addedToList = true;
+    }
     else {
         result = parseText(line);
+    }
+
+    if(addedToList) {
+        inNumberList = true;
+        if(!firstAdd) {
+            result = "<ol> \n" + result;
+            firstAdd = true;
+        }
+        
+            
+    }
+    else if(inNumberList) {
+        inNumberList = false;
+        firstAdd = false;
+        result = result + " \n </ol>";
     }
 
     output.push(result);
@@ -142,7 +166,7 @@ function parseText(line) {
 
     var final = `<p>${text}</p>`;
 
-    console.log(final);
+    
     return final;
 }
 
@@ -179,5 +203,18 @@ function parseImage(line) {
     
 }
 
+
+function parseNumberedList(line) {
+    
+    var toBeHurt = line.replace(line[0], "").replace(".", "");
+   
+    var contents = parseText(toBeHurt);
+    var finalItem = `<li>${contents}</li>`;
+    return finalItem
+}
+
+function isNumeric(num){
+    return !isNaN(num)
+}
 
 
