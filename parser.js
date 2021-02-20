@@ -29,12 +29,18 @@ function mainParser() {
 
 var inNumberList = false;
 var addedToNumberList = false;
-var firstAdd = false;
+var firstAddNumber = false;
+
+var inUnList = false;
+var addedToUnList = false;
+var firstAddUn = false;
+
 let output = [];
 function parseLine(line) {
     
     var result = "";
-    addedToList = false;
+    addedToNumberList = false;
+    addedToUnList = false;
     
 
     if(line === "") {
@@ -54,25 +60,41 @@ function parseLine(line) {
     }
     else if (isNumeric(line[0]) && line[1] == ".") {
         result = parseNumberedList(line);
-        addedToList = true;
+        addedToNumberList = true;
+    }
+    else if(line.startsWith("-")) {
+        result = parseUnorderedList(line);
+        addedToUnList = true;
     }
     else {
         result = parseText(line);
     }
 
-    if(addedToList) {
+    if(addedToNumberList) {
         inNumberList = true;
-        if(!firstAdd) {
-            result = "<ol> \n" + result;
-            firstAdd = true;
-        }
-        
+        if(!firstAddNumber) {
             
+            result = "<ol> \n" + result;
+            firstAddNumber = true;
+        }     
     }
     else if(inNumberList) {
         inNumberList = false;
-        firstAdd = false;
+        firstAddNumber = false;
         result = result + " \n </ol>";
+    }
+
+    if(addedToUnList) {
+        inUnList = true;
+        if(!firstAddUn) {
+            result = "<ul> \n" + result;
+            firstAddUn = true;
+        }  
+    }
+    else if(inUnList) {
+        inUnList = false;
+        firstAddUn = false;
+        result = result + " \n </ul>";
     }
 
     output.push(result);
@@ -211,6 +233,15 @@ function parseNumberedList(line) {
     var contents = parseText(toBeHurt);
     var finalItem = `<li>${contents}</li>`;
     return finalItem
+}
+
+function parseUnorderedList(line) {
+
+    var changed = line.replace("-", "");
+    var contents = parseText(changed);
+    var finalItem = `<li>${contents}</li>`;
+
+    return finalItem;
 }
 
 function isNumeric(num){
