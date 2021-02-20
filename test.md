@@ -1,12 +1,17 @@
-### Marky!
+# Marky!
 this is normal text
 this text is **bold** whilst this one is *italic*
 but, hey, you can do ***both***
 
+<links.com>
+<imaAEmail@gmail.com>
 
-# But wait theres more!
+Emojis! work too 🍔
 
-here is a blockqoute
+
+## But wait theres more!
+
+here is a blockquote
 
 > im a qoute, in a bloc!
 > qouteblocks can also have some cool **effects**
@@ -23,6 +28,16 @@ here is a blockqoute
 - ***Unordered***
 - lists!!!
 
+## Code!
 
+here is `some code` inline.
 
-![markdown fun](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Markdown-mark.svg/1200px-Markdown-mark.png)
+```
+but you can also
+have blocks!
+```
+
+#### And of course
+![markdown fun](https://www.busybeecandles.co.uk/wp-content/uploads/2013/08/apple-benefits32.jpg)
+
+There are images!

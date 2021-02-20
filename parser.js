@@ -35,6 +35,8 @@ var inUnList = false;
 var addedToUnList = false;
 var firstAddUn = false;
 
+var inCodeBlock = false;
+
 let output = [];
 function parseLine(line) {
     
@@ -42,9 +44,13 @@ function parseLine(line) {
     addedToNumberList = false;
     addedToUnList = false;
     
+    
 
     if(line === "") {
         result = "";
+    }
+    if(inCodeBlock && line != "```") {
+        result = line;
     }
     else if (line.startsWith("#")) {
         result = parseHeaders(line);
@@ -66,6 +72,20 @@ function parseLine(line) {
         result = parseUnorderedList(line);
         addedToUnList = true;
     }
+    else if(line.startsWith("<")) {
+        result = parseLinkOutline(line);
+    }
+    else if(line == "```") {
+        if(!inCodeBlock) {
+            inCodeBlock = true;
+            result = "<code>";
+        }
+        else {
+            inCodeBlock = false;
+            result = "</code>";
+        }
+        
+    }
     else {
         result = parseText(line);
     }
@@ -81,7 +101,7 @@ function parseLine(line) {
     else if(inNumberList) {
         inNumberList = false;
         firstAddNumber = false;
-        result = result + " \n </ol>";
+        result = result + " \n </ol> <br>";
     }
 
     if(addedToUnList) {
@@ -94,8 +114,10 @@ function parseLine(line) {
     else if(inUnList) {
         inUnList = false;
         firstAddUn = false;
-        result = result + " \n </ul>";
+        result = result + " \n </ul> <br>";
     }
+
+    
 
     output.push(result);
     return result;
@@ -151,6 +173,7 @@ function parseText(line) {
     var splitted = line.split("");
     var currentlyBold = false;
     var currentlyItalic = false;
+    var currentlyCode = false;
     for(var x = 0; x < splitted.length; x++) {
         var char = splitted[x];
         if(char == "*") {
@@ -181,6 +204,16 @@ function parseText(line) {
                    
                     splitted[x] = "<i>";
                 }
+            }
+        }
+        if(char == "`") {
+            if(!currentlyCode) {
+                splitted[x] = "<code>";
+                currentlyCode = true;
+            }
+            else {
+                currentlyCode = false;
+                splitted[x] = "</code>";
             }
         }
     }
@@ -244,8 +277,22 @@ function parseUnorderedList(line) {
     return finalItem;
 }
 
+function parseLinkOutline(line) {
+    var final = "";
+    if (line.includes("@")) {
+        var email = line.replace("<", "").replace(">", "");
+        final = `<a href="mailto:${email}">${email}</a>`;
+    }
+    else {
+        var link = line.replace("<", "").replace(">", "");
+        final = `<a href="${link}">${link}</a>`;
+    }
+    return final;
+}
+
 function isNumeric(num){
     return !isNaN(num)
 }
+
 
 
