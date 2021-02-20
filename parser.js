@@ -4,18 +4,19 @@ aaaaaaaaaaaaaaaaaa
 - add lists
 */
 
+/*
 const lineReader = require('line-reader'); 
 const fs = require("fs");
 const { Console } = require('console');
 var htmlFile = fs.createWriteStream('output.html', {
     flags: 'a' // 'a' means appending (old data will be preserved)
 })
-
+*/
 const br = "<br>";
 const hl = "<hr>";
 
-stringParser("**HEY**");
 
+/*
 function htmlParser() {
     lineReader.eachLine('test.md', (line, last) => { 
        
@@ -26,6 +27,7 @@ function htmlParser() {
    
 
 }
+*/
 
 function stringParser(data) {
 
