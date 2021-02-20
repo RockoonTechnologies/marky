@@ -16,6 +16,18 @@ code {
     color: white;
 }
 
+h4{
+  color: darkgrey;
+}
+
+h5{
+  color: darkgrey;
+}
+
+h6{
+  color: darkgrey;
+}
+
 .split {
   height: 100%;
   width: 50%;

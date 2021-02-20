@@ -1,33 +1,8 @@
-/*
-aaaaaaaaaaaaaaaaaa
 
-- add lists
-*/
-
-/*
-const lineReader = require('line-reader'); 
-const fs = require("fs");
-const { Console } = require('console');
-var htmlFile = fs.createWriteStream('output.html', {
-    flags: 'a' // 'a' means appending (old data will be preserved)
-})
-*/
 const br = "<br>";
 const hl = "<hr>";
 
 
-/*
-function htmlParser() {
-    lineReader.eachLine('test.md', (line, last) => { 
-       
-        var result = parseLine(line);
-        outputHtml(result);
-    }); 
-    outputHtml('<link rel="stylesheet" href="style.css">');
-   
-
-}
-*/
 
 function stringParser(data) {
 
