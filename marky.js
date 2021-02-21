@@ -15,6 +15,7 @@ function stringParser(data) {
     }
     output = output.join("");
     console.log(output);
+    return output;
 }
 
 
